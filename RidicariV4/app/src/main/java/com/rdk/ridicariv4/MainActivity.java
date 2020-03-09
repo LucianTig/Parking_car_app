@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         final Button btnRegister = findViewById(R.id.registerButton);
         final ProgressBar spinnerLoading = findViewById(R.id.spinner_loading);
 
-
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(MainActivity.this, "Sign Up Success", Toast.LENGTH_SHORT).show();
+                                finish();
                                 startActivity(new Intent(MainActivity.this, HomeActivity.class));
 
                             }
@@ -72,10 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
-
     }
-
 }

@@ -34,10 +34,13 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        final ProgressBar spinnerLoading = findViewById(R.id.spinner_loading_register);
 
         mFireBaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -68,9 +71,11 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (email.isEmpty() && pass.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Fields are empty", Toast.LENGTH_SHORT).show();
                 } else if (!(email.isEmpty()) && !(pass.isEmpty())) {
+                    spinnerLoading.setVisibility(ProgressBar.VISIBLE);
                     mFireBaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            spinnerLoading.setVisibility(ProgressBar.INVISIBLE);
                             if (!task.isSuccessful()) {
                                 Toast.makeText(RegisterActivity.this, "Register Failed", Toast.LENGTH_SHORT).show();
                             } else {
@@ -99,6 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                                 Toast.makeText(RegisterActivity.this, "Register Success", Toast.LENGTH_SHORT).show();
+                                finish();
                                 startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
 
                             }

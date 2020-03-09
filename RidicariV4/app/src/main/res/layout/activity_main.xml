@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:background="@drawable/login_background">
+    android:background="@drawable/ridicari_background">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="Welcome!"
         android:textColor="#000000"
@@ -23,28 +23,32 @@
         android:layout_height="wrap_content"
         android:text="Nice to see you again!"
         android:textSize="20dp"
-        android:textColor="#E9000000"
+        android:textColor="#000000"
         android:layout_marginLeft="50dp"/>
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:ems="12"
         android:hint="@string/Email"
         android:inputType="textEmailAddress"
         android:layout_gravity="center"
-        android:layout_marginTop="110dp"/>
+        android:layout_marginTop="110dp"
+        android:textColor="#000000"
+        android:background="@drawable/white_border2"/>
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:hint="@string/Password"
+        android:ems="12"
         android:inputType="textPassword"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
+        android:background="@drawable/white_border2"
+
         />
 
     <Button
@@ -78,30 +82,29 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="20dp">
+        android:layout_marginTop="130dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You are not a member?"
-            android:textSize="20sp"
             android:layout_gravity="bottom"
-            android:textColor="#000000"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="10dp"
-            />
+            android:text="You are not a member?"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/registerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:text="Register"
             android:background="@android:color/transparent"
-            android:textSize="20sp"
             android:gravity="bottom"
-            android:textColor="#740A0A"/>
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textColor="#740A0A"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </LinearLayout>

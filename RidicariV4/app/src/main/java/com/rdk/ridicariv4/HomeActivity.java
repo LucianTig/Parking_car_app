@@ -137,7 +137,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        //mSearchText = (EditText) findViewById(R.id.input_search);
         mGps = (ImageView) findViewById(R.id.ic_gps);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -269,24 +268,44 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         try {
             if (mLocationPermissionsGranted) {
 
-                final Task location = mFusedLocationProviderClient.getLastLocation();
-                location.addOnCompleteListener(new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull Task task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "onComplete: found location!");
-                            Location currentLocation = (Location) task.getResult();
+                mFusedLocationProviderClient.getLastLocation()
+                        .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                            @Override
+                            public void onSuccess(Location location) {
+                                // Got last known location. In some rare situations this can be null.
+                                if (location != null) {
+                                    // Logic to handle location object
+                                    moveCamera(new LatLng(location.getLatitude(), location.getLongitude()),
+                                            DEFAULT_ZOOM,
+                                            "My Location");
+                                }
+                                else{
+                                    Log.d(TAG, "onComplete: Current location is null");
+                                    Toast.makeText(HomeActivity.this, "Unable to get current location. Please activate location", Toast.LENGTH_SHORT).show();
+                                }
+                            }
 
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                    DEFAULT_ZOOM,
-                                    "My Location");
+                        });
 
-                        } else {
-                            Log.d(TAG, "onComplete: current location is null");
-                            Toast.makeText(HomeActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+//                final Task location = mFusedLocationProviderClient.getLastLocation();
+//                location.addOnCompleteListener(new OnCompleteListener() {
+//                    @Override
+//                    public void onComplete(@NonNull Task task) {
+//                        if (task.isSuccessful()) {
+//                            Log.d(TAG, "onComplete: found location!");
+//                            Location currentLocation = (Location) task.getResult();
+//                            System.out.println("Latitude: "+ currentLocation.getLatitude());
+//
+//                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
+//                                    DEFAULT_ZOOM,
+//                                    "My Location");
+//
+//                        } else {
+//                            Log.d(TAG, "onComplete: current location is null");
+//                            Toast.makeText(HomeActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
             }
         } catch (SecurityException e) {
             Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage());

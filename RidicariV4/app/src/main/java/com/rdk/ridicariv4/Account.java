@@ -133,6 +133,4 @@ public class Account extends AppCompatActivity {
             }
         });
     }
-
-
 }

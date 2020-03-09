@@ -37,8 +37,9 @@ import org.w3c.dom.Text;
 
 public class Change extends AppCompatActivity {
 
-    private EditText edtx_pass;
+    private EditText edtx_newpass;
     private Button change_passs;
+    private EditText edtx_oldpass;
     ProgressDialog dialog;
 
     FirebaseFirestore db;
@@ -54,9 +55,10 @@ public class Change extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mFireBaseAuth = FirebaseAuth.getInstance();
 
-        edtx_pass =(EditText)findViewById(R.id.pass);
+        edtx_newpass =(EditText)findViewById(R.id.pass);
 
         change_passs = findViewById(R.id.button_change);
+
 
 
         change_passs.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +70,7 @@ public class Change extends AppCompatActivity {
                 {
                     dialog.setMessage("Changing password, please wait!");
                     dialog.show();
-                    user.updatePassword(edtx_pass.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    user.updatePassword(edtx_newpass.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful())
